@@ -10,6 +10,8 @@
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
+    "@uniswap/sdk-core": "^7.13.0",
+    "@uniswap/v3-sdk": "^3.30.0",
     "@workspace/api-zod": "workspace:*",
     "@workspace/db": "workspace:*",
     "@workspace/integrations-openai-ai-server": "workspace:*",
@@ -17,6 +19,7 @@
     "cors": "^2",
     "drizzle-orm": "catalog:",
     "express": "^5",
+    "jsbi": "^4.3.2",
     "pino": "^9",
     "pino-http": "^10",
     "viem": "^2.47.14"

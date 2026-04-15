@@ -15,6 +15,7 @@ import AiAnalyst from "@/pages/ai";
 import Staking from "@/pages/staking";
 import DaoGovernance from "@/pages/dao";
 import DaoProposalView from "@/pages/dao-proposal";
+import Liquidity from "@/pages/liquidity";
 import NotFound from "@/pages/not-found";
 import { useEffect } from "react";
 
@@ -34,6 +35,7 @@ function Router() {
         <Route path="/staking" component={Staking} />
         <Route path="/dao" component={DaoGovernance} />
         <Route path="/dao/:id" component={DaoProposalView} />
+        <Route path="/liquidity" component={Liquidity} />
         <Route path="/about" component={About} />
         <Route component={NotFound} />
       </Switch>

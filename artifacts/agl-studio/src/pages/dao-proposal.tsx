@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { ArrowLeft, CheckCircle2, XCircle, MinusCircle, User } from "lucide-react";
+import { Input } from "@/components/ui/input";
 import { formatAddress } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 import { useQueryClient } from "@tanstack/react-query";
@@ -22,16 +23,21 @@ export default function DaoProposalView() {
   const voteMutation = useCastDaoVote();
   const { toast } = useToast();
   const queryClient = useQueryClient();
-  const [mockVotingPower] = useState(() => (Math.floor(Math.random() * 50000) + 1000).toString());
+  const [voterAddress, setVoterAddress] = useState("");
+  const [votingPower, setVotingPower] = useState("1");
 
   const handleVote = async (choice: 'for' | 'against' | 'abstain') => {
+    if (!voterAddress || !voterAddress.startsWith("0x")) {
+      toast({ variant: "destructive", title: "Address Required", description: "Enter your wallet address to vote." });
+      return;
+    }
     try {
       await voteMutation.mutateAsync({
         id: proposalId,
         data: {
-          voter: "0x" + Math.random().toString(16).slice(2, 42), // Mock user
+          voter: voterAddress,
           voteChoice: choice,
-          votingPower: mockVotingPower
+          votingPower,
         }
       });
       toast({ title: "Vote Cast", description: `Successfully voted ${choice.toUpperCase()}` });
@@ -157,7 +163,20 @@ export default function DaoProposalView() {
                 <CardTitle className="text-sm tracking-widest uppercase text-primary">Cast Your Vote</CardTitle>
               </CardHeader>
               <CardContent className="pt-4 space-y-3">
-                <div className="text-xs font-mono text-muted-foreground mb-2">Voting Power: <span className="text-primary">{mockVotingPower} AGL</span></div>
+                <div className="space-y-2 mb-3">
+                <Input
+                  placeholder="Your 0x wallet address"
+                  value={voterAddress}
+                  onChange={(e) => setVoterAddress(e.target.value)}
+                  className="rounded-none border-primary/30 bg-black/50 font-mono text-xs h-8"
+                />
+                <Input
+                  placeholder="Voting power (AGL)"
+                  value={votingPower}
+                  onChange={(e) => setVotingPower(e.target.value)}
+                  className="rounded-none border-primary/30 bg-black/50 font-mono text-xs h-8"
+                />
+              </div>
                 <Button 
                   onClick={() => handleVote('for')} 
                   disabled={voteMutation.isPending}

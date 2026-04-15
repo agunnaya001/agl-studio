@@ -5,6 +5,7 @@ import indexerRouter from "./indexer";
 import aiRouter from "./ai";
 import stakingRouter from "./staking";
 import daoRouter from "./dao";
+import liquidityRouter from "./liquidity";
 
 const router: IRouter = Router();
 
@@ -14,5 +15,6 @@ router.use("/indexer", indexerRouter);
 router.use("/ai", aiRouter);
 router.use("/staking", stakingRouter);
 router.use("/dao", daoRouter);
+router.use("/liquidity", liquidityRouter);
 
 export default router;

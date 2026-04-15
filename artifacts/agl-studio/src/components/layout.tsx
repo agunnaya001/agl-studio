@@ -1,5 +1,5 @@
 import { Link, useLocation } from "wouter";
-import { Activity, BarChart2, Flame, ArrowRightLeft, Wallet, Info, Menu, Database, Bot, Layers, Vote } from "lucide-react";
+import { Activity, BarChart2, Flame, ArrowRightLeft, Wallet, Info, Menu, Database, Bot, Layers, Vote, Droplets } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useHealthCheck } from "@workspace/api-client-react";
@@ -15,6 +15,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
     { href: "/analytics", label: "Analytics", icon: BarChart2 },
     { href: "/staking", label: "Staking", icon: Layers },
     { href: "/dao", label: "Governance", icon: Vote },
+    { href: "/liquidity", label: "Liquidity", icon: Droplets },
     { href: "/burn", label: "Burn Portal", icon: Flame },
     { href: "/transfers", label: "Transfers", icon: ArrowRightLeft },
     { href: "/wallet", label: "Wallet Lookup", icon: Wallet },
